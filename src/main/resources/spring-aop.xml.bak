@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- 扫描包，纳入spring的管理 -->
+    <context:component-scan base-package="com.useful.aop.two" />
+
+    <!-- 定义通知 -->
+    <bean name="configLogOut" class="com.useful.aop.two.ConfigLogOut" />
+    <!-- 配置AOP切面 -->
+    <aop:config>
+        <!-- 定义通知 order 定义优先级,值越小优先级越大-->
+        <aop:aspect ref="configLogOut" order="0">
+	        <!-- 定义切点函数 -->
+	        <aop:pointcut id="pointcut" expression="execution(* com.useful.aop.two.UserSevice.add(..))" />
+            <!-- 环绕通知 -->
+            <aop:around method="logFile" pointcut-ref="pointcut"  />
+        </aop:aspect>
+    </aop:config>
+</beans> 

@@ -21,7 +21,7 @@ public class TestMain {
 	
 	public ProxyFactory getProxy() {
 		/**
-		 *  声明切点，配置日志打印规则
+		 *  声明【切点】，配置日志打印规则
 		 */
 		NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
 		pointcut.addMethodName("del*");
@@ -29,12 +29,12 @@ public class TestMain {
 		pointcut.addMethodName("add*");
 		
 		/**
-		 *  创建通知
+		 *  创建【通知】
 		 */
 		LogAdvice advice = new LogAdvice();
 		
 		/**
-		 *  创建切面，切面=通知+切点
+		 *  创建【切面】，切面=通知+切点
 		 */
 	    Advisor advisor = new DefaultPointcutAdvisor(pointcut,advice);
 	    
@@ -45,7 +45,7 @@ public class TestMain {
 	    ProxyFactory pf = new ProxyFactory();
 	    // 创建要代理的业务
 	    UserSevice us = new UserSeviceImpl();
-	    // 把业务交给工厂
+	    // 把业务交给工厂,【指定目标对象】
 	    pf.setTarget(us);
 	    // 增加代理的日志切面
 	    pf.addAdvisor(advisor);
