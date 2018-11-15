@@ -22,10 +22,16 @@
 	</properties>
 
 	<dependencies>
+		<!-- spring-boot-starter 模板：核心模块，包括自动配置支持、日志和YAML -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- spring-boot-starter-web 模块：web模块 -->
+         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 		
 		<!-- Netty -->
 		<dependency>
@@ -62,6 +68,7 @@
 			<artifactId>spring-aop</artifactId>
 		</dependency> -->
 
+		<!-- 日志配置 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -74,9 +81,62 @@
 		    <scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			 <groupId>com.useful</groupId>
+			  <artifactId>useful-api</artifactId>
+			  <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- 这个需要为 true 热部署才有效 -->
+		<dependency>
+	         <groupId>org.springframework.boot</groupId>
+	         <artifactId>spring-boot-devtools</artifactId>
+	         <optional>true</optional> 
+	     </dependency>
 		
 		
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+		<!-- HTML解析工具  -->
+        <dependency>
+        	<groupId>net.sourceforge.nekohtml</groupId>
+        	<artifactId>nekohtml</artifactId>
+        </dependency>
 	</dependencies>
+	
+	
+	<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 
