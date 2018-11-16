@@ -60,9 +60,9 @@ public class LogAopConfig {
 				this.logger.debug("Exit: {}.{}() with result = {}", new Object[]{joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(), result});
 			}
 			return result;
-		} catch (IllegalArgumentException var3) {
+		} catch (IllegalArgumentException ae) {
 			this.logger.error("非法参数 argument: {} in {}.{}()", new Object[]{Arrays.toString(joinPoint.getArgs()), joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName()});
-			throw var3;
+			throw ae;
 		}
 	}
 	

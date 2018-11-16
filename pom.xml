@@ -33,20 +33,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 		
-		<!-- Netty -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>4.1.22.Final</version>
-		</dependency>
-		
-		<!-- fastjson -->
-		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
-		</dependency>
-
 		<!-- AOP切面 - java原有的包 -->
 		<dependency>
 			<groupId>aopalliance</groupId>
@@ -63,12 +49,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 		</dependency> -->
-
-		<!-- 日志配置 -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -90,7 +70,6 @@
 	         <optional>true</optional> 
 	     </dependency>
 		
-		
 		<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
@@ -109,6 +88,8 @@
         	<groupId>org.aspectj</groupId>
         	<artifactId>aspectjweaver</artifactId>
         </dependency>
+        
+        
 	</dependencies>
 	
 	
