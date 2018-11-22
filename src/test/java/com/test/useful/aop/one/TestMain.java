@@ -1,4 +1,4 @@
-package com.useful.aop.one;
+package com.test.useful.aop.one;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;

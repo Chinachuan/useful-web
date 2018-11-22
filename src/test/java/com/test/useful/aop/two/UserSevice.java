@@ -1,4 +1,4 @@
-package com.useful.aop.one;
+package com.test.useful.aop.two;
 
 public interface UserSevice {
 	

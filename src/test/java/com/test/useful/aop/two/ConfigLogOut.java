@@ -1,4 +1,4 @@
-package com.useful.aop.two;
+package com.test.useful.aop.two;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;

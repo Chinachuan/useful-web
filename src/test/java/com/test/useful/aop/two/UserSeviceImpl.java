@@ -1,4 +1,4 @@
-package com.useful.aop.two;
+package com.test.useful.aop.two;
 
 public class UserSeviceImpl implements UserSevice{
 

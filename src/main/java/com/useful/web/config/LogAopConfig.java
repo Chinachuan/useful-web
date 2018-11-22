@@ -22,6 +22,10 @@ public class LogAopConfig {
 	@Autowired
 	private Environment env;
 
+	/**
+	 * 可以使用逻辑运算符 && ！...
+     * execution(com.useful.web.controller..*) &&  within(com.useful.web.*)
+	 */
 	@Pointcut("within(com.useful.web.controller..*)")
 	public void loggerPointcut() {
 	}
