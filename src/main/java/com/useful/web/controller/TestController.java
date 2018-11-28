@@ -1,5 +1,6 @@
 package com.useful.web.controller;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ public class TestController {
 	@RequestMapping(value = "/restful",method = RequestMethod.GET)
 	public ModelAndView restful(@RequestParam(name = "username",required=false,defaultValue = "张三") String name){
 		ModelAndView mv = ViewUtil.CreateView("restfuOl");
+		String randomNumeric = RandomStringUtils.randomNumeric(8);
+		System.out.println("随机生成一个8位数的字符串"+randomNumeric);
 //		System.out.println(ReflectionToStringBuilder.toString(new Test(),ToStringStyle.MULTI_LINE_STYLE));
 		return mv;
 	}
