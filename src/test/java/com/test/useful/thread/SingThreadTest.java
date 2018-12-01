@@ -7,6 +7,10 @@ public class SingThreadTest {
 	
 	
 	public static void singThread() {
+//		同步并发容器
+//		final CopyOnWriteArrayList<Integer> sscc = new CopyOnWriteArrayList<>();
+//		sscc.add(1);
+		
 		final List<Integer> succ = new ArrayList<Integer>();
 		for (int i = 0; i < 100; i++) {
 			Thread td = new Thread(new Runnable() {
