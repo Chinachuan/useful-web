@@ -17,7 +17,7 @@ public class WebsocketChatServerInitializer extends ChannelInitializer<SocketCha
 		ChannelPipeline pipeline = ch.pipeline();
 		
 		// 处理日志
-		pipeline.addLast(new LoggingHandler(LogLevel.INFO));
+		pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
 
         /**
          * 将字节解码为HttpRequest、HttpContent 和LastHttpContent。

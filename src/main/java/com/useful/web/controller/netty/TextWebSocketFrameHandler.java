@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
@@ -22,6 +23,27 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  */
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
+	/**
+	       存
+		private static final AttributeKey<String> HOSTADDRESS = AttributeKey.valueOf("key");
+		socketChannel.attr(HOSTADDRESS).setIfAbsent(value);
+		取
+		String value = ctx.channel().attr(HOSTADDRESS).get();
+	 */
+	// 绑定在Channel上 Channel上的AttributeMap就是大家共享的，每一个ChannelHandler都能获取到。
+	private static final AttributeKey<String> HOSTADDRESS = AttributeKey.valueOf("key");
+	
+	/**
+	       存
+		public static final AttributeKey<NettyChannel> NETTY_CHANNEL_KEY = AttributeKey.valueOf("netty.channel");  
+		Attribute<NettyChannel> attr = ctx.attr(NETTY_CHANNEL_KEY);  
+		attr.setIfAbsent(value); 
+		取
+		value = attr.get();
+	 */
+	// 绑定在ChannelHandlerContext上  ChannelHandlerContext是唯一的
+	// public static final AttributeKey<NettyChannel> NETTY_CHANNEL_KEY = AttributeKey.valueOf("netty.channel");  
+	
 	public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
 	@Override
