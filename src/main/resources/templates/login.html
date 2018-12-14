@@ -5,24 +5,76 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <script th:src="@{js/RSA.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
 </head>
 <body>
 
+<script th:inline="javascript">
+function submitF(){
+    var publicKeyExponent = [[${session.rsaExponent}]];
+    var publicKeyModulus = [[${session.rsaModulus}]];
+    if(publicKeyExponent=="" ||publicKeyModulus==""){
+        alert("秘钥异常，请稍后重试！");
+    }
+    var pwd = $("#passwordStr").val();
+    var loginName = $("#loginName").val().length;
+    var passwordLenth =  $("#passwordStr").val().length;
+    var vcode =  $("#vcode").val().length;
+    if(loginName <=3){
+        $("#msg").html("用户名不得少于4位");
+        return;
+    }
+    console.log(passwordLenth);
+    if(passwordLenth<8 || passwordLenth>16){
+        $("#msg").html("密码长度为8-16位");
+        return ;
+    }
+    if(vcode<=3){
+        $("#msg").html("验证码不得少于4位");
+        return ;
+    }
+
+    RSAUtils.setMaxDigits(200);
+    var key = new RSAUtils.getKeyPair(publicKeyExponent, "", publicKeyModulus);
+    var encrypedPwd = RSAUtils.encryptedString(key,pwd.split("").reverse().join(""));
+    $("#password").val(encrypedPwd);
+    $("#msg").html("");
+    $("#loginForm").submit();
+    $("#btn").attr("disabled", true);
+    $("#btn").html("登录中..."); 
+}
+
+function randomCode() {
+    document.getElementById("imc").src="randomCode?r="+Math.random();
+}
+
+</script>
+
 <h2 class="login_title">用户登录</h2>
 		
-		<form th:action="@{/user/index}" th:method="post">
+		 <form id="loginForm" name="loginForm" action="login.html" method="post">
 			<div class="formDiv">
 		        <div class="rowDiv">
 		        	<div class="inputName">用户名 : </div>
-		            <div class="inputMain"><input type="text" name="userName" id="" class="form-control" value=""/></div>
+		            <div class="inputMain"><input type="text" name="loginName" id="loginName" class="form-control" value="" placeholder="用户名"/></div>
 		        </div>
 		        <div class="rowDiv">
 		        	<div class="inputName">密&nbsp;&nbsp;码 : </div>
-		            <div class="inputMain"><input type="text" name="pwd" id="" class="form-control" value=""/></div>
+		            <div class="inputMain">
+		            	<input type="password" id="passwordStr" class="form-control" placeholder="密码" value="" />
+		            	<input type="hidden" name="password" id="password" class="form-control" value=""/>
+		            </div>
 		        </div>
+		         <div class="rowDiv">
+		         	  <div class="inputName">验证码 : </div>
+		              <div class="inputMain" style="width: 180px">
+	                	 <input type="text" name="vcode" id="vcode" class="form-control" placeholder="验证码" value=""/>
+		              </div>
+		              <img src="randomCode" id="imc" style="cursor:pointer;float: left;margin-top: 10px;margin-left: 15px" onclick="randomCode()"/>
+                  </div>
 		        <div class="rowDiv">
-		        	<button type="submit" class="btn btn-success">登录</button>
+		        	<button type="button" onclick="submitF()" class="btn btn-success">登录</button>
 		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		        	<button type="button" class="btn btn-danger">撤销</button>
 		        </div>
@@ -30,13 +82,5 @@
 	       
 		</form>
 </body>
-
-<script type="text/javascript">
-	/* window.onload=function(){
-		var str = "lihaiwei1995"
-		var s1 = str.split("").reverse().join("");
-		alert("s1==>"+s1);
-	} */
-</script>
 
 </html>
